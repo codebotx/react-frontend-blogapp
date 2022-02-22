@@ -31,7 +31,7 @@ function Form(props) {
         <div>
             {props.bookmark ? (
 
-                <div className="mb-3">
+                <div className="mb-3 py-4 px-4 px-md-5">
                     <label htmlFor="title" className="form-label">Title</label>
                     <input type="text" className="form-control" id="title" placeholder="Please enter the title"
                         value={title} onChange={e => setTitle(e.target.value)}

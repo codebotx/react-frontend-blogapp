@@ -21,7 +21,7 @@ function App() {
       'method': 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token 0d6b7ad32a16517f28aebaac42246d27bd4dca74`
+        'Authorization': `Token ${token['mytoken']}`
       }
     })
       .then(resp => resp.json())
@@ -100,7 +100,7 @@ function App() {
             <button onClick={bookmarkForm} className="btn btn-primary">Insert blog</button>
           </div>
         </div>
-		</div>
+      </div>
       <div className="row">
 
         <div className="col py-2">
@@ -114,14 +114,8 @@ function App() {
 
       <ArticleList bookmarks={bookmarks}
         editBtn={editBtn} deleteBtn={deleteBtn} />
-       {/* <Form bookmark={editBookmark} /> */}
 
       {editBookmark ? <Form bookmark={editBookmark} updatedInformation={updatedInformation} insertedInformation={insertedInformation} /> : null}
-
-
-
-
-
     </div>
 
 
