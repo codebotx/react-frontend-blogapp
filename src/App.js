@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 function App() {
-  
 
-  const [articles, setArticles] = useState([])
-  const [editArticle, setEditArticle] = useState(null)
+
+  const [bookmarks, setBookmarks] = useState([])
+  const [editBookmark, setEditBookmark] = useState(null)
   const [token, setToken, removeToken] = useCookies(['mytoken'])
   let history = useNavigate()
 
@@ -21,14 +21,14 @@ function App() {
       'method': 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token ${token['mytoken']}`
+        'Authorization': `Token 0d6b7ad32a16517f28aebaac42246d27bd4dca74`
       }
     })
       .then(resp => resp.json())
-      .then(resp => setArticles(resp))
+      .then(resp => setBookmarks(resp))
       .catch(error => console.log(error))
 
-  }, [token])
+  }, [])
 
 
   useEffect(() => {
@@ -41,45 +41,45 @@ function App() {
     }
   }, [token, history])
 
-  const editBtn = (article) => {
-    setEditArticle(article)
+  const editBtn = (bookmark) => {
+    setEditBookmark(bookmark)
 
   }
 
-  const updatedInformation = (article) => {
-    const new_article = articles.map(myarticle => {
-      if (myarticle.id === article.id) {
-        return article;
+  const updatedInformation = (bookmark) => {
+    const new_bookmark = bookmarks.map(mybookmark => {
+      if (mybookmark.id === bookmark.id) {
+        return bookmark;
       }
       else {
-        return myarticle;
+        return mybookmark;
       }
     })
 
-    setArticles(new_article)
+    setBookmarks(new_bookmark)
 
   }
 
-  const articleForm = () => {
-    setEditArticle({ title: '', description: '' })
+  const bookmarkForm = () => {
+    setEditBookmark({ title: '', description: '' })
 
   }
 
-  const insertedInformation = (article) => {
-    const new_articles = [...articles, article]
-    setArticles(new_articles)
+  const insertedInformation = (bookmark) => {
+    const new_bookmarks = [...bookmarks, bookmark]
+    setBookmarks(new_bookmarks)
 
   }
 
-  const deleteBtn = (article) => {
-    const new_articles = articles.filter(myarticle => {
-      if (myarticle.id === article.id) {
+  const deleteBtn = (bookmark) => {
+    const new_bookmarks = bookmarks.filter(mybookmark => {
+      if (mybookmark.id === bookmark.id) {
         return false
       }
       return true;
     })
 
-    setArticles(new_articles)
+    setBookmarks(new_bookmarks)
 
   }
 
@@ -88,22 +88,22 @@ function App() {
 
   }
 
-  return (
-      <div className="App">
+  return (<>
+
+
+    <div className="App">
 
       <div className="row">
+        <h1>Blog.SIT</h1>
         <div className="col">
-
-          <h2>Django And ReactJS Course</h2>
-          <br />
+          <div className="col py-2">
+            <button onClick={bookmarkForm} className="btn btn-primary">Insert blog</button>
+          </div>
         </div>
+		</div>
+      <div className="row">
 
-        <div className="col">
-          <button onClick={articleForm} className="btn btn-primary">Insert Article</button>
-        </div>
-
-
-        <div className="col">
+        <div className="col py-2">
           <button onClick={logoutBtn} className="btn btn-primary">Logout</button>
         </div>
 
@@ -112,9 +112,11 @@ function App() {
 
 
 
-      <ArticleList articles={articles} editBtn={editBtn} deleteBtn={deleteBtn} />
+      <ArticleList bookmarks={bookmarks}
+        editBtn={editBtn} deleteBtn={deleteBtn} />
+       {/* <Form bookmark={editBookmark} /> */}
 
-      {editArticle ? <Form article={editArticle} updatedInformation={updatedInformation} insertedInformation={insertedInformation} /> : null}
+      {editBookmark ? <Form bookmark={editBookmark} updatedInformation={updatedInformation} insertedInformation={insertedInformation} /> : null}
 
 
 
@@ -123,6 +125,7 @@ function App() {
     </div>
 
 
+  </>
   );
 }
 
