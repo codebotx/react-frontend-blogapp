@@ -24,9 +24,9 @@ function ArticleList(props) {
       {props.bookmarks && props.bookmarks.map(bookmark => {
         return (<>
 
-          <div className="card border-dark mb-3 text-center " >
-            {/* <div class="card-header text-dark">BLOGS</div> */}
-            <div className="card-body text-dark">
+
+          <div className="card border-dark mb-3 text-center py-4 px-4 px-md-5 d-flex align-items-center justify-content-center h-100" style={{ minHeight: '30vh'  }} >         
+            <div className="card-body text-dark w-100" style={{ maxWidth: '400px' }}>
               <h5 className="card-title" key={bookmark.id}>{bookmark.title}</h5>
               <p className="card-text">{bookmark.description}</p>
             </div>
